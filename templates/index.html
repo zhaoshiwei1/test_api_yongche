@@ -1,4 +1,4 @@
-$def with (form)
+$def with (result)
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -35,10 +35,40 @@ $def with (form)
                 <div class="inner">
                     <h1 class="major">API List</h1>
 
+                    <!-- Table -->
                     <section>
-                        <form action="" method="post">
-                            $:form.render()
-                        </form>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>$:result[0][0]</th>
+                                    <th>$:result[0][1]</th>
+                                    <th>$:result[0][2]</th>
+                                    <th>$:result[0][3]</th>
+                                    <th>A C T I O N</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>0</td>
+                                    <td>aasad</td>
+                                    <td>akshdasdhakdhaksdhajkdhaskj</td>
+                                    <td>asjdlasdjlasdjaldjal</td>
+                                    <td>
+                                        <li><a href="/" class="button special">Del</a></li>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <td>
+                                        <li><a href="/" class="button special">Add</a></li>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </section>
 
                 </div>

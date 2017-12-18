@@ -1,0 +1,10 @@
+CREATE TABLE API_COMMON (
+API_ID          INT PRIMARY KEY    NOT NULL,
+API_MODULE      CHAR(50)           NOT NULL,
+API_NAME        CHAR(50)           NOT NULL,
+API_URL         CHAR(200)          NOT NULL,
+API_METHOD      CHAR(50)           NOT NULL,
+API_PARAM_NUM   INT                NOT NULL,
+API_PARAMS      TEXT, 
+API_TC          TEXT
+)

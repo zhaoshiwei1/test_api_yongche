@@ -3,6 +3,8 @@
 import web
 import sys
 
+from db_utility import db_action
+
 reload(sys)
 sys.setdefaultencoding('utf8')
 
@@ -14,26 +16,16 @@ app = web.application(urls, globals())
 
 
 class start:
-    form = web.form.Form(
-        web.form.Textbox('title', web.form.notnull, description='Post title: '),
-
-        web.form.Textbox('content', web.form.notnull, description='Post content: '),
-
-        web.form.Button('Post entry'),
-    )
-    a = ['1', '2', '3']
 
     def GET(self):
-        form = self.form
+        d_a = db_action()
+        result = d_a.get_all_api_list()
+        print result[1][0][0]
         render = web.template.render('templates/')
-        return render.index(form)
+        return render.index(result)
 
     def POST(self):
-        get_input = web.input()
-        print get_input
-        form = self.form
-        render = web.template.render('templates/')
-        return render.index(form)
+        return self.GET()
 
 if __name__ == "__main__":
         app.run()
