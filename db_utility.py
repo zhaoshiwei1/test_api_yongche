@@ -25,3 +25,7 @@ class db_action:
         all_information.append(self.db.cu.fetchall())
         return all_information
 
+
+    def delete_api_by_id(self, id):
+        self.db.cu.execute("DELETE FROM API_COMMON WHERE API_ID = " + id)
+        self.db.conn.commit()

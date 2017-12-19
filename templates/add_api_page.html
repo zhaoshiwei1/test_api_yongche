@@ -1,0 +1,48 @@
+$def with (form)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>API Test Server - YIDAOYONGCHE</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--[if lte IE 8]><script src="static/assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="static/assets/css/main.css" />
+    <!--[if lte IE 9]><link rel="stylesheet" href="static/assets/css/ie9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="static/assets/css/ie8.css" /><![endif]-->
+</head>
+
+<body>
+
+<!-- Header -->
+<header id="header">
+    <a href="/" class="title">API Test Server</a>
+    <nav>
+        <ul>
+            <li><a href="/" class="active">API Manage</a></li>
+            <li><a href="XX.html">TestCase</a></li>
+            <li><a href="XX.html">TestPlan</a></li>
+            <li><a href="XX.html">TestResult</a></li>
+            <li><a href="xx.html">Performance</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <h1 class="major">Adding API</h1>
+                <section>
+                    <form action="/new_api_i" method="POST">
+                        $:form.render()
+                    </form>
+                </section>
+        </div>
+    </section>
+
+
+</div>
+</body>
+</html>
