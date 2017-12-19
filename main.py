@@ -4,7 +4,7 @@ import web
 import sys
 
 from db_utility import db_action
-
+from utility import utility
 reload(sys)
 sys.setdefaultencoding('utf8')
 
@@ -46,9 +46,21 @@ class add_api_start:
         return render.add_api_page(form)
 
     def POST(self):
+        uti = utility()
+        api_dic = {}
         input_set = web.input()
-        print input_set
-        return self.GET()
+        if input_set.has_key("CONTINUE"):
+            para_num = input_set["API_PARAM_NUM"]
+            api_dic["API_METHOD"] = input_set["API_METHOD"]
+            api_dic["API_URL"] = input_set["API_URL"]
+            api_dic["API_PARAM_NUM"] = para_num
+            api_dic["API_NAME"] = input_set["API_NAME"]
+            api_dic["API_MODULE"] = input_set["API_MODULE"]
+            form_string = uti.make_textbox_form(api_dic["API_PARAM_NUM"])
+            API_string = api_dic["API_MODULE"] + " : " + api_dic["API_NAME"] + " : " + api_dic["API_URL"]
+            render = web.template.render('templates/')
+            return render.add_api_page_submit(API_string, form_string)
+
 
 if __name__ == "__main__":
         app.run()
