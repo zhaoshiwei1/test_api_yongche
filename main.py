@@ -10,24 +10,26 @@ sys.setdefaultencoding('utf8')
 
 urls = (
     '/', 'start',
-    '/new_api_i', 'add_api_start'
+    '/new_api_i', 'add_api_start',
+    '/new_api_ii', 'add_api_submit'
 )
 
 app = web.application(urls, globals())
 
 
 class start:
-    d_a = db_action()
 
     def GET(self):
-        result = self.d_a.get_all_api_list()
+        d_a = db_action()
+        result = d_a.get_all_api_list()
         render = web.template.render('templates/')
         return render.index(result)
 
     def POST(self):
+        d_a = db_action()
         input_set = web.input()
         if input_set.has_key("del_api_btn"):
-            self.d_a.delete_api_by_id(input_set["del_api_btn"])
+            d_a.delete_api_by_id(input_set["del_api_btn"])
         return self.GET()
 
 
@@ -46,6 +48,7 @@ class add_api_start:
         return render.add_api_page(form)
 
     def POST(self):
+        d_a = db_action()
         uti = utility()
         api_dic = {}
         input_set = web.input()
@@ -56,11 +59,27 @@ class add_api_start:
             api_dic["API_PARAM_NUM"] = para_num
             api_dic["API_NAME"] = input_set["API_NAME"]
             api_dic["API_MODULE"] = input_set["API_MODULE"]
-            form_string = uti.make_textbox_form(api_dic["API_PARAM_NUM"])
+            form_string = uti.make_text_form(api_dic["API_PARAM_NUM"])
             API_string = api_dic["API_MODULE"] + " : " + api_dic["API_NAME"] + " : " + api_dic["API_URL"]
+            API_ID = d_a.get_max_id()
+            d_a.new_api_general(api_dic, API_ID)
             render = web.template.render('templates/')
-            return render.add_api_page_submit(API_string, form_string)
+            return render.add_api_page_submit(API_ID, API_string, form_string)
 
+
+class add_api_submit:
+
+    def GET(self):
+        return web.seeother('/')
+
+    def POST(self):
+        d_a = db_action()
+        input_set = web.input()
+        if input_set.has_key("submit_api_btn"):
+            API_ID = input_set.pop("submit_api_btn")
+            value_list = input_set.values()
+            d_a.update_param_by_id(API_ID, value_list)
+            return web.seeother('/')
 
 if __name__ == "__main__":
         app.run()

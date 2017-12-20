@@ -8,8 +8,8 @@ class utility:
         for i in range(int(num)):
             form_string += """
             <div class="6u 12u$(xsmall)">
-			    <label for="parameter">参数"""
-            form_string += str(i+1) +""": """+""" </label>
+			    <label for="parameter">参数名"""
+            form_string += str(i+1) +""" : """+""" </label>
 			</div>
 			<div class="6u$ 12u$(xsmall)">
 				<input type="text" name = """+ "\"" + str(i+1) +"\"" +""" value=""/>

@@ -1,4 +1,4 @@
-$def with (API_String, form_string)
+$def with (API_ID, API_String, form_string)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,10 +35,10 @@ $def with (API_String, form_string)
         <div class="inner">
             <h1 class="major">$:API_String</h1>
             <section>
-                <form action="/new_api_i" method="POST">
+                <form action="/new_api_ii" method="POST">
                     $:form_string
                     <button name = "submit_api_btn" type = "submit"
-                            value= "">Submit</button>
+                            value= "$:API_ID">Submit</button>
                 </form>
             </section>
         </div>
