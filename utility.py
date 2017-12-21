@@ -22,23 +22,23 @@ class utility:
         return form_string
 
 
-    def make_category_form(self, option_list):
+    def make_category_form(self, category_dic):
         form_string = """"""
         form_string += """
             <div class="row uniform">
                 <div class="6u 12u$(xsmall)">
                     <div class="select-wrapper">
-                        <select name="demo-category_name" id="demo-category_id">
+                        <select name="category_id" id="">
 						    <option value="">- Category -</option>"""
-        for item in option_list:
-            form_string += """<option value="1">""" + item + """</option>"""
+        for item in category_dic:
+            form_string += """<option value="""+"\""+ str(item) +"\"" +""">""" + category_dic[item] + """</option>"""
 
         form_string += """
         				</select>
 					</div>
 				</div>
 				<div class="6u$ 12u$(xsmall)">
-					<a href="" class="button fit">Filter</a>
+                    <button name = "filter_tc" type = "submit" value="" class = "button fit small">Filter</button>
 				</div>
 			</div>
             """

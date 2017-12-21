@@ -86,7 +86,8 @@ class add_api_submit:
 class show_test_case:
 
     def GET(self):
-        category = []
+        test_case_body = []
+        category_dic = {}
         d_a = db_action()
         uti = utility()
         result = d_a.get_all_api_list()
@@ -95,9 +96,9 @@ class show_test_case:
             category_string += item[1] + """ : """
             category_string += item[2] + """ : """
             category_string += item[3]
-            category.append(category_string)
+            category_dic[item[0]] = category_string
         render = web.template.render('templates/')
-        return render.test_case_i(uti.make_category_form(category))
+        return render.test_case_i(uti.make_category_form(category_dic))
 
     def POST(self):
         input_set = web.input()
