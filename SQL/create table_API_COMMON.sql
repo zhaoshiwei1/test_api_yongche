@@ -5,6 +5,5 @@ API_NAME        CHAR(50)           NOT NULL,
 API_URL         CHAR(200)          NOT NULL,
 API_METHOD      CHAR(50)           NOT NULL,
 API_PARAM_NUM   INT                NOT NULL,
-API_PARAMS      TEXT, 
-API_TC          TEXT
+API_PARAMS      TEXT
 )

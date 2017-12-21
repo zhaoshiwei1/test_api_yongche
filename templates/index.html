@@ -19,7 +19,7 @@ $def with (result)
             <nav>
                 <ul>
                     <li><a href="/" class="active">API Manage</a></li>
-                    <li><a href="XX.html">TestCase</a></li>
+                    <li><a href="/show_tc">TestCase</a></li>
                     <li><a href="XX.html">TestPlan</a></li>
                     <li><a href="XX.html">TestResult</a></li>
                     <li><a href="xx.html">Performance</a></li>
@@ -41,7 +41,7 @@ $def with (result)
                             <table>
                                 <thead>
                                 <tr>
-                                    <th>$:result[0][0]</th>
+                                    <!--<th>$:result[0][0]</th>-->
                                     <th>$:result[0][1]</th>
                                     <th>$:result[0][2]</th>
                                     <th>$:result[0][3]</th>
@@ -51,7 +51,7 @@ $def with (result)
                                 <tbody>
                                 $for item in result[1]
                                     <tr>
-                                        <td>$:item[0]</td>
+                                        <!--<td>$:item[0]</td>-->
                                         <td>$:item[1]</td>
                                         <td>$:item[2]</td>
                                         <td>$:item[3]</td>
@@ -65,7 +65,7 @@ $def with (result)
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <td colspan="4"></td>
+                                    <td colspan="3"></td>
                                     <td>
                                         <a href="/new_api_i" class="button special">Add</a>
                                     </td>

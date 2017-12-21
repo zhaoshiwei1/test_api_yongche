@@ -20,3 +20,26 @@ class utility:
         """
 
         return form_string
+
+
+    def make_category_form(self, option_list):
+        form_string = """"""
+        form_string += """
+            <div class="row uniform">
+                <div class="6u 12u$(xsmall)">
+                    <div class="select-wrapper">
+                        <select name="demo-category_name" id="demo-category_id">
+						    <option value="">- Category -</option>"""
+        for item in option_list:
+            form_string += """<option value="1">""" + item + """</option>"""
+
+        form_string += """
+        				</select>
+					</div>
+				</div>
+				<div class="6u$ 12u$(xsmall)">
+					<a href="" class="button fit">Filter</a>
+				</div>
+			</div>
+            """
+        return form_string

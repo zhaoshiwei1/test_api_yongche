@@ -11,7 +11,8 @@ sys.setdefaultencoding('utf8')
 urls = (
     '/', 'start',
     '/new_api_i', 'add_api_start',
-    '/new_api_ii', 'add_api_submit'
+    '/new_api_ii', 'add_api_submit',
+    '/show_tc', 'show_test_case'
 )
 
 app = web.application(urls, globals())
@@ -80,6 +81,29 @@ class add_api_submit:
             value_list = input_set.values()
             d_a.update_param_by_id(API_ID, value_list)
             return web.seeother('/')
+
+
+class show_test_case:
+
+    def GET(self):
+        category = []
+        d_a = db_action()
+        uti = utility()
+        result = d_a.get_all_api_list()
+        for item in result[1]:
+            category_string = ""
+            category_string += item[1] + """ : """
+            category_string += item[2] + """ : """
+            category_string += item[3]
+            category.append(category_string)
+        render = web.template.render('templates/')
+        return render.test_case_i(uti.make_category_form(category))
+
+    def POST(self):
+        input_set = web.input()
+        print input_set
+        return web.seeother('/show_tc')
+
 
 if __name__ == "__main__":
         app.run()
