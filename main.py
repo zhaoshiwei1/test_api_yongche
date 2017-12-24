@@ -145,7 +145,11 @@ class view_test_case:
             tc_id = input_set["v_tc_details"]
             d_a = db_action()
             details_string = d_a.get_tc_details_by_id(tc_id)
-            return details_string
+            if len(details_string[0]) == len(details_string[1]):
+                render = web.template.render('templates/')
+                return render.test_case_iii(details_string)
+            else:
+                return "Error Code: NOT DEFINED"
 
 if __name__ == "__main__":
         app.run()

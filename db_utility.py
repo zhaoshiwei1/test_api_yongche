@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import os
 import sqlite3
 
@@ -86,6 +87,29 @@ class db_action:
         self.db.conn.close()
 
     def get_tc_details_by_id(self, tc_id):
-        self.db.cu.execute("SELECT TC_PARAMS FROM TC_COMMON WHERE TC_ID = " + tc_id)
+        tc_details = []
+        titles = []
+        values = []
+        self.db.cu.execute("SELECT API_MODULE, API_NAME, API_URL, API_METHOD FROM API_COMMON WHERE API_ID = "
+                           "(SELECT API_ID FROM TC_COMMON WHERE TC_ID = " + tc_id + ")")
+        reuslt_1 = self.db.cu.fetchall()
+        titles.append("接口模块： ")
+        values.append(reuslt_1[0][0])
+        titles.append("接口名称： ")
+        values.append(reuslt_1[0][1])
+        titles.append("接口URL: ")
+        values.append(reuslt_1[0][2])
+        titles.append("接口方法： ")
+        values.append(reuslt_1[0][3])
+        self.db.cu.execute("SELECT TC_NAME, TC_PARAMS FROM TC_COMMON WHERE TC_ID = " + tc_id)
         result_set = self.db.cu.fetchall()
-        return result_set[0]
+        titles.append("测试用例名称： ")
+        values.append(result_set[0][0])
+        param_string_list = result_set[0][1].split("[#]")
+        for item in param_string_list:
+            param = item.split("(#)")
+            titles.append(param[0])
+            values.append(param[1])
+        tc_details.append(titles)
+        tc_details.append(values)
+        return tc_details

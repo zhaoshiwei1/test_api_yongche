@@ -1,0 +1,60 @@
+$def with (tc_body)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>API Test Server - YIDAOYONGCHE</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--[if lte IE 8]><script src="static/assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="static/assets/css/main.css" />
+    <!--[if lte IE 9]><link rel="stylesheet" href="static/assets/css/ie9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="static/assets/css/ie8.css" /><![endif]-->
+</head>
+
+<body>
+
+<!-- Header -->
+<!--<header id="header">-->
+    <!--<a href="" class="title">API Test Server</a>-->
+    <!--<nav>-->
+        <!--<ul>-->
+            <!--<li><a href="">API Manage</a></li>-->
+            <!--<li><a href="" class="active">TestCase</a></li>-->
+            <!--<li><a href="">TestPlan</a></li>-->
+            <!--<li><a href="">TestResult</a></li>-->
+            <!--<li><a href="">Performance</a></li>-->
+        <!--</ul>-->
+    <!--</nav>-->
+<!--</header>-->
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <h1 class="major">TestCase Details</h1>
+
+
+            <!-- Table -->
+
+            <section>
+                <div class="table-wrapper">
+                    <table>
+                        <tbody>
+                                $for i in range(len(tc_body[0]))
+                                    <tr>
+                                    <td>$:tc_body[0][i]</td>
+                                    <td>$:tc_body[1][i]</td>
+                                    </tr>
+                        </tbody>
+                </div>
+            </section>
+
+        </div>
+    </section>
+
+
+</div>
+</body>
+</html>
