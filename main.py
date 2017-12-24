@@ -12,7 +12,9 @@ urls = (
     '/', 'start',
     '/new_api_i', 'add_api_start',
     '/new_api_ii', 'add_api_submit',
-    '/show_tc', 'show_test_case'
+    '/show_tc', 'show_test_case',
+    '/del_tc', 'delete_test_case',
+    '/view_tc', 'view_test_case'
 )
 
 app = web.application(urls, globals())
@@ -86,7 +88,6 @@ class add_api_submit:
 class show_test_case:
 
     def GET(self):
-        test_case_body = []
         category_dic = {}
         d_a = db_action()
         uti = utility()
@@ -98,13 +99,53 @@ class show_test_case:
             category_string += item[3]
             category_dic[item[0]] = category_string
         render = web.template.render('templates/')
-        return render.test_case_i(uti.make_category_form(category_dic))
+        return render.test_case_i(uti.make_category_form(category_dic, 0))
 
     def POST(self):
         input_set = web.input()
-        print input_set
+        if input_set["category_id"] == "NULL":
+            return web.seeother('/show_tc')
+        else:
+            api_id = input_set["category_id"]
+            category_id_fake = int(api_id) + 1
+            category_dic = {}
+            d_a = db_action()
+            tc_body = d_a.get_tc_list_by_api_id(api_id)
+            uti = utility()
+            result = d_a.get_all_api_list()
+            for item in result[1]:
+                category_string = ""
+                category_string += item[1] + """ : """
+                category_string += item[2] + """ : """
+                category_string += item[3]
+                category_dic[item[0]] = category_string
+            render = web.template.render('templates/')
+            return render.test_case_ii(uti.make_category_form(category_dic, category_id_fake), tc_body)
+
+
+class delete_test_case:
+
+    def GET(self):
         return web.seeother('/show_tc')
 
+    def POST(self):
+        input_set = web.input()
+        if input_set.has_key("del_tc_btn"):
+            tc_id = input_set["del_tc_btn"]
+            d_a = db_action()
+            d_a.delete_tc_by_id(tc_id)
+        return self.GET()
+
+
+class view_test_case:
+
+    def POST(self):
+        input_set = web.input()
+        if input_set.has_key("v_tc_details"):
+            tc_id = input_set["v_tc_details"]
+            d_a = db_action()
+            details_string = d_a.get_tc_details_by_id(tc_id)
+            return details_string
 
 if __name__ == "__main__":
         app.run()

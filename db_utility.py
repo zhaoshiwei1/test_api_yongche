@@ -70,3 +70,22 @@ class db_action:
         self.db.cu.execute(sql)
         self.db.conn.commit()
         self.db.conn.close()
+
+    def get_tc_list_by_api_id(self,api_id):
+        # rec = self.db.cu.execute("SELECT * FR0M TC_COMMON WHERE API_ID = " +"\'" + api_id +"\'")
+        rec = self.db.cu.execute("SELECT TC_ID, API_ID, TC_NAME, TC_PARAMS from TC_COMMON WHERE API_ID = " + api_id)
+        col_name_list = [tuple[0] for tuple in rec.description ]
+        tc_body = []
+        tc_body.append(col_name_list)
+        tc_body.append(self.db.cu.fetchall())
+        return tc_body
+
+    def delete_tc_by_id(self, tc_id):
+        self.db.cu.execute("DELETE FROM TC_COMMON WHERE TC_ID = " + tc_id)
+        self.db.conn.commit()
+        self.db.conn.close()
+
+    def get_tc_details_by_id(self, tc_id):
+        self.db.cu.execute("SELECT TC_PARAMS FROM TC_COMMON WHERE TC_ID = " + tc_id)
+        result_set = self.db.cu.fetchall()
+        return result_set[0]

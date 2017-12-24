@@ -1,0 +1,97 @@
+$def with (category, tc_body)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>API Test Server - YIDAOYONGCHE</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--[if lte IE 8]><script src="static/assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="static/assets/css/main.css" />
+    <!--[if lte IE 9]><link rel="stylesheet" href="static/assets/css/ie9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="static/assets/css/ie8.css" /><![endif]-->
+</head>
+
+<body>
+
+<!-- Header -->
+<header id="header">
+    <a href="/" class="title">API Test Server</a>
+    <nav>
+        <ul>
+            <li><a href="/">API Manage</a></li>
+            <li><a href="/show_tc" class="active">TestCase</a></li>
+            <li><a href="XX.html">TestPlan</a></li>
+            <li><a href="XX.html">TestResult</a></li>
+            <li><a href="xx.html">Performance</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <h1 class="major">TestCase List</h1>
+
+            <!-- Form -->
+            <section>
+                <form action="/show_tc" method="post">
+                    $:category
+                </form>
+            </section>
+
+            <!-- Table -->
+
+            <section>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>$:tc_body[0][0]</th>
+                            <th>$:tc_body[0][2]</th>
+                            <th>View Details</th>
+                            <th>Delete  Case</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        $for item in tc_body[1]
+                        <tr>
+                            <!--<td>$:item[0]</td>-->
+                            <td>$:item[0]</td>
+                            <td>$:item[2]</td>
+                            <td>
+                                <form action="/view_tc" method="post" target="_blank">
+                                    <button name = "v_tc_details" type = "submit"
+                                            value= $:item[0]>View</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/del_tc" method="post">
+                                    <button name = "del_tc_btn" type = "submit"
+                                            value= $:item[0]>Del</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <!--<tfoot>-->
+                        <!--<tr>-->
+                            <!--<td colspan="2"></td>-->
+                            <!--<td>-->
+                                <!--<a href="" class="button special">Add New TestCase</a>-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                        <!--</tfoot>-->
+                    </table>
+                    <a href="" class="button special">Add New TestCase</a>
+                </div>
+            </section>
+
+        </div>
+    </section>
+
+
+</div>
+</body>
+</html>

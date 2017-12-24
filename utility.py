@@ -22,24 +22,50 @@ class utility:
         return form_string
 
 
-    def make_category_form(self, category_dic):
-        form_string = """"""
-        form_string += """
-            <div class="row uniform">
-                <div class="6u 12u$(xsmall)">
-                    <div class="select-wrapper">
-                        <select name="category_id" id="">
-						    <option value="">- Category -</option>"""
-        for item in category_dic:
-            form_string += """<option value="""+"\""+ str(item) +"\"" +""">""" + category_dic[item] + """</option>"""
+    def make_category_form(self, category_dic, if_selected):
+        if if_selected:
+            category_id = if_selected - 1
+            form_string = """"""
+            form_string += """
+                <div class="row uniform">
+                    <div class="6u 12u$(xsmall)">
+                        <div class="select-wrapper">
+                            <select name="category_id" id="">
+                                <option value="NULL">- Category -</option>"""
+            for item in category_dic:
+                if item == category_id:
+                    form_string += """<option value="""+"\""+ str(item) +"\"" +""" selected="selected">""" + category_dic[item] + """</option>"""
+                else:
+                    form_string += """<option value="""+"\""+ str(item) +"\"" +""">""" + category_dic[item] + """</option>"""
 
-        form_string += """
-        				</select>
-					</div>
-				</div>
-				<div class="6u$ 12u$(xsmall)">
-                    <button name = "filter_tc" type = "submit" value="" class = "button fit small">Filter</button>
-				</div>
-			</div>
-            """
-        return form_string
+            form_string += """
+                            </select>
+                        </div>
+                    </div>
+                    <div class="6u$ 12u$(xsmall)">
+                        <button name = "filter_tc" type = "submit" value="" class = "button fit small">Filter</button>
+                    </div>
+                </div>
+                """
+            return form_string
+        else:
+            form_string = """"""
+            form_string += """
+                <div class="row uniform">
+                    <div class="6u 12u$(xsmall)">
+                        <div class="select-wrapper">
+                            <select name="category_id" id="">
+                                <option value="NULL">- Category -</option>"""
+            for item in category_dic:
+                form_string += """<option value="""+"\""+ str(item) +"\"" +""">""" + category_dic[item] + """</option>"""
+
+            form_string += """
+                            </select>
+                        </div>
+                    </div>
+                    <div class="6u$ 12u$(xsmall)">
+                        <button name = "filter_tc" type = "submit" value="" class = "button fit small">Filter</button>
+                    </div>
+                </div>
+                """
+            return form_string
