@@ -61,7 +61,7 @@ class db_action:
 
     def get_max_id_tc(self):
         l = []
-        self.db.cu.execute("SELECT DISTINCT API_ID FROM TC_COMMON")
+        self.db.cu.execute("SELECT DISTINCT TC_ID FROM TC_COMMON")
         result_set = self.db.cu.fetchall()
         for m in result_set:
             l.append(int(m[0]))
