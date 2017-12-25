@@ -69,3 +69,34 @@ class utility:
                 </div>
                 """
             return form_string
+
+
+    def make_tc_editing_form(self, test_case_template):
+        form_string = """"""
+        form_string += """<div class="row uniform">"""
+        for i in range(1, len(test_case_template)):
+            if i == 1:
+                form_string += """
+                <div class="6u 12u$(xsmall)">
+                    <label for="parameter">""" + test_case_template[i]
+                form_string += """ : """+""" </label>
+                </div>
+                <div class="6u$ 12u$(xsmall)">
+                    <input type="text" name = "tc_name" value=""/>
+                </div>
+                """
+            else:
+                form_string += """
+                <div class="6u 12u$(xsmall)">
+                    <label for="parameter">""" + test_case_template[i]
+                form_string += """ : """+""" </label>
+                </div>
+                <div class="6u$ 12u$(xsmall)">
+                    <input type="text" name = """+ "\"" + test_case_template[i] +"\"" +""" value=""/>
+                </div>
+                """
+        form_string += """
+        </div>
+        """
+
+        return form_string

@@ -1,4 +1,4 @@
-$def with (category, tc_body)
+$def with (category, tc_body, api_id)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,7 +62,7 @@ $def with (category, tc_body)
                             <td>$:item[0]</td>
                             <td>$:item[2]</td>
                             <td>
-                                <form action="/view_tc" method="post" target="_blank">
+                                <form action="/view_tc" method="get" target="_blank">
                                     <button name = "v_tc_details" type = "submit"
                                             value= $:item[0]>View</button>
                                 </form>
@@ -84,7 +84,9 @@ $def with (category, tc_body)
                         <!--</tr>-->
                         <!--</tfoot>-->
                     </table>
-                    <a href="" class="button special">Add New TestCase</a>
+                    <form action="/new_tc" method = "get" target="_blank">
+                        <button name = "add_new_tc" value= $:api_id class="button special">Add</button>
+                    </form>
                 </div>
             </section>
 

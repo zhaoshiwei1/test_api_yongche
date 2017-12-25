@@ -1,6 +1,2 @@
-CREATE TABLE TC_COMMON (
-TC_ID           INT PRIMARY KEY    NOT NULL,
-API_ID          INT                NOT NULL,
-TC_NAME         TEXT               NOT NULL,
-TC_PARAMS       TEXT               NOT NULL
-)
+INSERT INTO TC_COMMON (TC_ID, API_ID, TC_NAME, TC_PARAMS)
+VALUES (0, 1, 'Ò»¸ö×ÖÓÐØí¶ÁÒô', 'wwwwwwwwwww')

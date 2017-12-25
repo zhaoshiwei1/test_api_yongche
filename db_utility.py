@@ -59,6 +59,17 @@ class db_action:
         else:
             return max(l)+1
 
+    def get_max_id_tc(self):
+        l = []
+        self.db.cu.execute("SELECT DISTINCT API_ID FROM TC_COMMON")
+        result_set = self.db.cu.fetchall()
+        for m in result_set:
+            l.append(int(m[0]))
+        if len(l) == 0:
+            return 0
+        else:
+            return max(l)+1
+
 
     def update_param_by_id(self, id, param_list):
         param_string = ';'.join(param_list)
@@ -113,3 +124,29 @@ class db_action:
         tc_details.append(titles)
         tc_details.append(values)
         return tc_details
+
+    def get_api_by_details(self, api_id):
+        api_general = []
+        self.db.cu.execute("SELECT API_MODULE, API_NAME, API_URL, API_PARAMS FROM API_COMMON WHERE API_ID = " + api_id)
+        result_set = self.db.cu.fetchall()
+        api_general.append(result_set[0][0] + ": " + result_set[0][1] + ": " + result_set[0][2])
+        api_general.append("测试用例名称")
+        params_list = result_set[0][3].split(";")
+        for param in params_list:
+            api_general.append(param)
+        return api_general
+
+    def add_test_case(self, api_id, tc_name, tc_params_string):
+        tc_id = self.get_max_id_tc()
+
+        sql = """
+            INSERT INTO TC_COMMON (TC_ID, API_ID, TC_NAME, TC_PARAMS)
+            VALUES(
+        """
+        sql += """\"""" + str(tc_id) + """\", """
+        sql += """\"""" + api_id + """\", """
+        sql += """\"""" + tc_name + """\", """
+        sql += """\"""" + tc_params_string + """\" )"""
+        self.db.cu.execute(sql)
+        self.db.conn.commit()
+        self.db.conn.close()

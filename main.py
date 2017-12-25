@@ -14,7 +14,8 @@ urls = (
     '/new_api_ii', 'add_api_submit',
     '/show_tc', 'show_test_case',
     '/del_tc', 'delete_test_case',
-    '/view_tc', 'view_test_case'
+    '/view_tc', 'view_test_case',
+    '/new_tc', 'new_test_case_start'
 )
 
 app = web.application(urls, globals())
@@ -120,7 +121,7 @@ class show_test_case:
                 category_string += item[3]
                 category_dic[item[0]] = category_string
             render = web.template.render('templates/')
-            return render.test_case_ii(uti.make_category_form(category_dic, category_id_fake), tc_body)
+            return render.test_case_ii(uti.make_category_form(category_dic, category_id_fake), tc_body, api_id)
 
 
 class delete_test_case:
@@ -139,7 +140,7 @@ class delete_test_case:
 
 class view_test_case:
 
-    def POST(self):
+    def GET(self):
         input_set = web.input()
         if input_set.has_key("v_tc_details"):
             tc_id = input_set["v_tc_details"]
@@ -150,6 +151,34 @@ class view_test_case:
                 return render.test_case_iii(details_string)
             else:
                 return "Error Code: NOT DEFINED"
+
+
+class new_test_case_start:
+
+    def GET(self):
+        input_set = web.input()
+        if input_set.has_key("add_new_tc"):
+            api_id = input_set["add_new_tc"]
+            uti = utility()
+            d_a = db_action()
+            test_case_template = d_a.get_api_by_details(api_id)
+            render = web.template.render('templates/')
+            return render.test_case_iv(api_id, test_case_template[0], uti.make_tc_editing_form(test_case_template))
+
+    def POST(self):
+        input_set = web.input()
+        d_a = db_action()
+        if input_set.has_key("submit_api_btn"):
+            api_id = input_set.pop("submit_api_btn")
+            tc_name = input_set.pop("tc_name")
+            params_list_string = ""
+            for key in input_set:
+                params_list_string += key+"(#)"+input_set[key]+"[#]"
+
+            params_string = params_list_string[0:len(params_list_string)-3]
+            d_a.add_test_case(api_id, tc_name, params_string)
+            return "Save Successfully, Close Page!"
+
 
 if __name__ == "__main__":
         app.run()
